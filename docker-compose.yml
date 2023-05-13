@@ -1,0 +1,58 @@
+version: '3'
+services:
+  express-api:
+    container_name: serverless-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - fullstack
+    environment:
+      NODE_ENV: development
+      PORT: 8080
+    ports:
+      - '8080:${PORT}'
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - "6500:${POSTGRES_PORT}"
+    volumes:
+      - postgresDB:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    networks:
+      - fullstack
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:${REDIS_PORT}"
+    volumes:
+      - redisDB:/data
+    environment:
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_USERNAME: ${REDIS_USERNAME}
+      REDIS_PASSWORD:
+      REDIS_DB: ${REDIS_DB}
+    networks:
+      - fullstack
+
+volumes:
+  postgresDB:
+  redisDB:
+
+networks:
+  fullstack:
+    driver: bridge
