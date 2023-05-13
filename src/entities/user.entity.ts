@@ -7,7 +7,7 @@ import {
 } from "class-validator"
 
 export enum RoleEnumType {
-    BUYER = 'Buyer',
+    CUSTOMER = 'Customer',
     ADMIN = 'Admin',
 }
 
@@ -36,9 +36,9 @@ export class User extends Model {
     @Column({
         type: 'enum',
         enum: RoleEnumType,
-        default: RoleEnumType.BUYER,
+        default: RoleEnumType.CUSTOMER,
     })
-    role!: RoleEnumType.BUYER;
+    role!: RoleEnumType.CUSTOMER;
 
     @Column({
         nullable: true,
