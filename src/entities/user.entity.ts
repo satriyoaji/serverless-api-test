@@ -1,10 +1,11 @@
-import { Entity, Column, Index, BeforeInsert, PrimaryGeneratedColumn, DeleteDateColumn } from 'typeorm';
+import {Entity, Column, Index, BeforeInsert, PrimaryGeneratedColumn, DeleteDateColumn, OneToMany} from 'typeorm';
 import bcrypt from 'bcryptjs';
 import Model from './model.entity';
 import {
     IsEmail,
     Length,
 } from "class-validator"
+import {Transaction} from "./transaction.entity";
 
 export enum RoleEnumType {
     CUSTOMER = 'Customer',
@@ -61,6 +62,9 @@ export class User extends Model {
     ) {
         return await bcrypt.compare(candidatePassword, hashedPassword);
     }
+
+    @OneToMany(() => Transaction, transaction => transaction.id)
+    product_transactions!: Transaction[];
 
     toJSON() {
         return { ...this, password: undefined, verified: undefined };

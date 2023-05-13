@@ -1,3 +1,5 @@
+import productRoutes from "./routes/product.routes";
+
 require('dotenv').config();
 import express, { NextFunction, Request, Response } from 'express';
 import config from 'config';
@@ -45,6 +47,7 @@ AppDataSource.initialize()
     // ROUTES
     app.use('/api/auth', authRouter);
     app.use('/api/users', userRouter);
+    app.use('/api/products', productRoutes);
 
     // HEALTH CHECKER
     app.get('/api/health-checker', async (_, res: Response) => {
