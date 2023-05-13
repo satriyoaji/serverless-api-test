@@ -1,5 +1,5 @@
 import {NextFunction, Request, Response } from 'express';
-import {getById, create, deleteById, update, getPaged, findProducts} from '../services/product_service';
+import {getById, create, deleteById, update, getPaged, findProducts} from '../services/product.service';
 import { productInputSchema, pagedInputSchema, SortingColumn } from '../schemas/product.schema';
 import AppError from '../utils/appError';
 import { validate } from 'uuid';

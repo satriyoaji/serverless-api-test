@@ -1,7 +1,7 @@
 import { object, string, TypeOf, z, number } from 'zod';
 
 
-export const transactionSchema = object({
+export const transactionProductSchema = object({
   body: object({
     customer_id: string({
       required_error: 'Customer ID is required',
@@ -11,7 +11,6 @@ export const transactionSchema = object({
     }),
   })
 })
-
 
 export const pagedSchema = object({
   query: object({
@@ -26,5 +25,5 @@ export const pagedSchema = object({
 
 
 
-export type TransactionInputSchema = TypeOf<typeof transactionSchema>['body'];
+export type TransactionInputSchema = TypeOf<typeof transactionProductSchema>['body'];
 export type PagedInputSchema = TypeOf<typeof pagedSchema>['query'];

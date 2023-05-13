@@ -16,7 +16,6 @@ const router = express.Router();
 
 router.use(deserializeUser, requireUser);
 
-// Get currently logged in user
 router.get('/', getProductListHandler);
 router.get('/paged/', validate(pagedSchema), getPagedHandler);
 router.post('/', validate(productSchema), createHandler);
