@@ -13,6 +13,7 @@ import userRouter from './routes/user.routes';
 import validateEnv from './utils/validateEnv';
 import redisClient from './utils/connectRedis';
 import transactionRoutes from "./routes/transaction.routes";
+import sls from "serverless-http"
 
 AppDataSource.initialize()
   .then(async () => {
@@ -84,6 +85,6 @@ AppDataSource.initialize()
 
     console.log(`Server started on port: ${port}`);
 
-    module.exports = app;
+    module.exports.server = sls(app);
   })
   .catch((error) => console.log(error));

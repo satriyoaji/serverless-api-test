@@ -1,5 +1,5 @@
 # Installs Node.js image
-FROM node:14.17.4-alpine3.14
+FROM public.ecr.aws/lambda/nodejs:14.17.4
 
 # sets the working directory for any RUN, CMD, COPY command
 # all files we put in the Docker container running the server will be in /usr/src/app (e.g. /usr/src/app/package.json)
@@ -18,6 +18,5 @@ RUN yarn install
 EXPOSE 8080
 
 # Runs the dev yarn script to build & start the server
-RUN yarn build
 RUN yarn migrate:up
 CMD yarn start
